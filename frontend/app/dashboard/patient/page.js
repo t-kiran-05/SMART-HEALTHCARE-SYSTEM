@@ -185,19 +185,30 @@ export default function PatientDashboard() {
                         <h3 className="text-lg font-semibold text-gray-800">Dr. {appointment.doctorName}</h3>
                         {getStatusBadge(appointment.status)}
                       </div>
+
                       <div className="space-y-1 text-sm text-gray-600">
                         <p className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
                           {new Date(appointment.appointmentDate).toLocaleDateString()}
                         </p>
+
                         <p className="flex items-center gap-2">
                           <Clock className="w-4 h-4" />
                           {appointment.appointmentTime}
                         </p>
-                        <p className="mt-2"><strong>Reason:</strong> {appointment.reason}</p>
-                        {appointment.notes && <p className="mt-2 text-blue-600"><strong>Doctor's Notes:</strong> {appointment.notes}</p>}
+
+                        <p className="mt-2">
+                          <strong>Reason:</strong> {appointment.reason}
+                        </p>
+
+                        {appointment.notes && (
+                          <p className="mt-2 text-blue-600">
+                            <strong>{"Doctor's Notes:"}</strong> {appointment.notes}
+                          </p>
+                        )}
                       </div>
                     </div>
+
                     {appointment.status === 'pending' && (
                       <button onClick={() => handleCancelAppointment(appointment.id)} className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200">
                         Cancel
@@ -216,7 +227,9 @@ export default function PatientDashboard() {
           <div className="bg-white rounded-lg max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-gray-800">Book Appointment</h2>
-              <button onClick={() => setShowBookingForm(false)}><X className="w-6 h-6 text-gray-600" /></button>
+              <button onClick={() => setShowBookingForm(false)}>
+                <X className="w-6 h-6 text-gray-600" />
+              </button>
             </div>
 
             <form onSubmit={handleBookAppointment} className="space-y-4">
@@ -233,7 +246,9 @@ export default function PatientDashboard() {
                 >
                   <option value="">Choose a doctor</option>
                   {doctors.map((doctor) => (
-                    <option key={doctor.id} value={doctor.id}>Dr. {doctor.fullName} - {doctor.specialization}</option>
+                    <option key={doctor.id} value={doctor.id}>
+                      Dr. {doctor.fullName} - {doctor.specialization}
+                    </option>
                   ))}
                 </select>
               </div>
